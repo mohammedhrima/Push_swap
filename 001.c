@@ -26,14 +26,14 @@ void push(int **from, size_t from_len, int **to, size_t to_len)
 	free(*to);
 	*to = ptr2;
 }
-
+// rotate stack
 void rotate(int *arr, size_t len)
 {
 	int tmp = arr[0];
 	ft_memcpy(arr, arr + 1, len - sizeof(int));
 	arr[len / sizeof(int) - 1] = tmp;
 }
-
+// reverse rotate stack
 void reverse_rotate(int *arr, size_t len)
 {
 	int tmp = arr[len / sizeof(int) - 1];
