@@ -1,0 +1,21 @@
+- a contains number, b is empty
+- not duplicated
+- sort numbers in stack a
+
+the allowed moves:
+	sa: swap 2 first elements at the top of stack a
+	sb: swap 2 first elements at the top of stack b
+	ss: do sa and sb at the same time
+	pa: put first element of at the top of b and put it at the top of a
+	pb: put first element of at the top of a and put it at the top of b
+	ra: shift all elements of stack a by 1
+	rb: shift all elements of stack b by 1
+	rr: do ra and rb
+	rra: reverse ra
+	rrb: reverse rb
+	rrr: rra and rrb at the same time
+
+
+
+set array of uint64_t
+every time you allocate , the address will be pushed to the array
