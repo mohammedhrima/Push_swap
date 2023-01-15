@@ -17,5 +17,3 @@ the allowed moves:
 
 
 
-set array of uint64_t
-every time you allocate , the address will be pushed to the array
