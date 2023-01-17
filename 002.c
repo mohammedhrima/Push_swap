@@ -43,7 +43,6 @@ void reverse_rotate(int *arr, size_t len)
 
 int main(void)
 {
-	// set variables in stack
 	size_t i;
 	int x[] = {7, 2, 3, 1, 6, 5};
 	int y[] = {17, 12, 13, 11, 16, 15};
