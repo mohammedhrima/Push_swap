@@ -19,3 +19,6 @@ the allowed moves:
 * create sorted array of  0,1,2,3,4,5,6,7...
 - check repetitive numbers
 - sort numbers (with index)
+- check meme functions
+- rotate up
+- reverse rotate down
