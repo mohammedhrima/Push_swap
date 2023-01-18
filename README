@@ -22,3 +22,19 @@ the allowed moves:
 - check meme functions
 - rotate up
 - reverse rotate down
+
+- test pushing *
+- test rotate *
+- test reverse rotate *
+
+- test pushing + rotate *
+- test pushing + reverse rotate *
+- test pushing + pushing *
+
+- test rotate + pushing *
+- test rotate + rotate *
+- test rotate + reverse rotate
+
+- test reverse rotate + pushing
+- test reverse rotate + reverse rotate *
+- test reverse rotate + rotate
