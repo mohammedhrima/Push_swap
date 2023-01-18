@@ -266,8 +266,8 @@ int main(void)
 	// 	;
 	// }
 	choose_move(list, &len, stack_b);
-	//choose_move(list, &len, stack_b);
-	//choose_move(list, &len, stack_b);
+	// choose_move(list, &len, stack_b);
+	// choose_move(list, &len, stack_b);
 
 	// printf("\n\nstack b\n");
 	// i = 0;

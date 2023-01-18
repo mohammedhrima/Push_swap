@@ -53,6 +53,8 @@ void push(num ***from, int *dest, int *len)
 				(*from)[j]->next--;
 			if (j - (*from)[j]->prev < 0)
 				(*from)[j]->prev--;
+			(*from)[j]->next %= *len;
+			(*from)[j]->prev %= *len;
 			j++;
 		}
 		i++;
@@ -123,31 +125,42 @@ int choose_move(num **list, int *len, int *stack_b)
 {
 	int i = 0;
 	int step_prev = -1, step_next = -1, the_index = -1;
+	if (*len == 0)
+		return (1);
 	while (i < *len)
 	{
 		if (list[0]->prev == 0 || list[0]->next == 0)
 		{
+			int j = 0;
+			printf("\nbefore push to stack b\n");
+			while (j < *len)
+			{
+				printf("%2d: +%d -%d | ", list[j]->value, list[j]->next, list[j]->prev);
+				j++;
+			}
 			printf("\npush to stack b\n");
 			push(&list, stack_b, len);
-			// printf("\nafter pushing\n");
-			// int j = 0;
-			// while (j < *len)
-			// {
-			// 	printf("%2d: +%d -%d | ", list[j]->value, list[j]->next, list[j]->prev);
-			// 	j++;
-			// }
-			// printf("\nstack b\n");
-			// j = 0;
-			// while (j < 7)
-			// {
-			// 	printf("%d ", stack_b[j]);
-			// 	j++;
-			// }
+			printf("\nafter pushing\n");
+			j = 0;
+			while (j < *len)
+			{
+				printf("%2d: +%d -%d | ", list[j]->value, list[j]->next, list[j]->prev);
+				j++;
+			}
+			// exit(0);
+			//  printf("\nstack b\n");
+			//  j = 0;
+			//  while (j < 7)
+			//  {
+			//  	printf("%d ", stack_b[j]);
+			//  	j++;
+			//  }
 		}
 		if (i - list[i]->prev == 0)
 		{
 			the_index = i;
 			printf("\nmove %d ,%d step, to the left\n", list[i]->value, list[i]->prev);
+			step_next = list[i]->next;
 			step_prev = list[i]->prev;
 		}
 		if (i + list[i]->next == *len)
@@ -155,21 +168,29 @@ int choose_move(num **list, int *len, int *stack_b)
 			the_index = i;
 			printf("\nmove %d ,%d step, to the right\n", list[i]->value, list[i]->next);
 			step_next = list[i]->next;
+			step_prev = list[i]->prev;
 		}
 		i++;
 	}
 	if (step_next <= step_prev)
 	{
-		printf("reverse rotate\n");
+		printf("before reverse rotate\n");
+		i = 0;
+		while (i < *len)
+		{
+			printf("%d: +%d -%d | ", list[i]->value, list[i]->next, list[i]->prev);
+			i++;
+		}
+		printf("\n\nreverse rotate\n");
 		reverse_rotate(&list, *len);
-		// printf("after rotate\n");
-		// i = 0;
-		// while (i < *len)
-		// {
-		// 	printf("%2d: +%d -%d | ", list[i]->value, list[i]->next, list[i]->prev);
-		// 	i++;
-		// }
-		// return (0);
+		printf("after rotate\n");
+		i = 0;
+		while (i < *len)
+		{
+			printf("%d: +%d -%d | ", list[i]->value, list[i]->next, list[i]->prev);
+			i++;
+		}
+		// exit(0);
 	}
 	else if (step_next > step_prev)
 	{
@@ -188,13 +209,13 @@ int choose_move(num **list, int *len, int *stack_b)
 	// {
 	// 	printf("\n\n\"verify choose_move\"\n");
 	// }
-	return (1);
+	return (0);
 }
 
 int main(void)
 {
 	int i;
-	int array0[] = {32, 11, 13, 5, 6, 7, 25};
+	int array0[] = {32, 4, 11, 13, 5, 6, 7, 25, 2};
 	int *array1 = ft_calloc(1, sizeof(array0)); // copy array0 in array1
 	int *stack_b = ft_calloc(1, sizeof(array0));
 	int *indexes = ft_calloc(1, sizeof(array0));	 // indexes container
@@ -260,7 +281,6 @@ int main(void)
 		printf("%d: +%d -%d | ", list[i]->value, list[i]->next, list[i]->prev);
 		i++;
 	}
-	// printf("\n\n");
 	choose_move(list, &push_len, stack_b);
 	printf("\n");
 	i = 0;
@@ -325,10 +345,57 @@ int main(void)
 		printf("%d: +%d -%d | ", list[i]->value, list[i]->next, list[i]->prev);
 		i++;
 	}
-
+	choose_move(list, &push_len, stack_b);
+	printf("\n");
+	i = 0;
+	while (i < push_len)
+	{
+		printf("%d: +%d -%d | ", list[i]->value, list[i]->next, list[i]->prev);
+		i++;
+	}
+	choose_move(list, &push_len, stack_b);
+	printf("\n");
+	i = 0;
+	while (i < push_len)
+	{
+		printf("%d: +%d -%d | ", list[i]->value, list[i]->next, list[i]->prev);
+		i++;
+	}
+	choose_move(list, &push_len, stack_b);
+	printf("\n");
+	i = 0;
+	while (i < push_len)
+	{
+		printf("%d: +%d -%d | ", list[i]->value, list[i]->next, list[i]->prev);
+		i++;
+	}
+	choose_move(list, &push_len, stack_b);
+	printf("\n");
+	i = 0;
+	while (i < push_len)
+	{
+		printf("%d: +%d -%d | ", list[i]->value, list[i]->next, list[i]->prev);
+		i++;
+	}
+	choose_move(list, &push_len, stack_b);
+	printf("\n");
+	i = 0;
+	while (i < push_len)
+	{
+		printf("%d: +%d -%d | ", list[i]->value, list[i]->next, list[i]->prev);
+		i++;
+	}
+	choose_move(list, &push_len, stack_b);
+	printf("\n");
+	i = 0;
+	while (i < push_len)
+	{
+		printf("%d: +%d -%d | ", list[i]->value, list[i]->next, list[i]->prev);
+		i++;
+	}
 	printf("\n\n");
 	i = 0;
-	while (i < 7)
+	while (i < len)
 	{
 		printf("%d ", stack_b[i]);
 		i++;

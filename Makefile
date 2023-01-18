@@ -1,5 +1,5 @@
 CC = cc
-SAN = -fsanitize=address -g3
+SAN = -fsanitize=address -fsanitize=undefined -g3
 SRC = ""
 LIB = ./Libft/libft.a
 OUT = ./a.out
