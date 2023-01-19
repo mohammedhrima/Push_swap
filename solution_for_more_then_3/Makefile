@@ -4,6 +4,7 @@ SRC = ""
 LIB = ../Libft/libft.a
 OUT = ./a.out
 RM = rm -rf
+msg = ""
 
 $(OUT):
 	@$(CC) $(LIB) $(SRC)
@@ -16,6 +17,7 @@ san:$(SRC)
 	@$(CC) $(SAN) $(LIB) $(SRC)
 	@$(OUT)
 	@$(RM) $(OUT)
+
 clean:
 	@$(RM) $(OUT)
 

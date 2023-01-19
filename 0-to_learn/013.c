@@ -184,7 +184,7 @@ int main(void)
 {
 	// verify array of 3 elements
 	int i;
-	int array0[] = {2,1,4,3,6};
+	int array0[] = {2, 1, 4, 3, 6};
 	int *array1 = ft_calloc(1, sizeof(array0)); // copy array0 in array1
 	int *stack_b = ft_calloc(1, sizeof(array0));
 	int *indexes = ft_calloc(1, sizeof(array0));	 // indexes container
