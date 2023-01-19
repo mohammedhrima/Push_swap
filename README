@@ -38,3 +38,8 @@ the allowed moves:
 - test reverse rotate + pushing
 - test reverse rotate + reverse rotate *
 - test reverse rotate + rotate
+
+- method for 3 numbers
+- method for 5 numbers
+- method for 100 numbers
+- method for 500 numbers

@@ -1,4 +1,5 @@
 #include "Libft/libft.h"
+int moves = 0;
 
 void swap_array(int *x, int *y)
 {
@@ -39,6 +40,7 @@ typedef struct number
 // push number *from one stack to another
 void push(num ***from, int *dest, int *len)
 {
+	moves++;
 	static int i;
 	int j = 0;
 	if (*len)
@@ -66,6 +68,7 @@ void push(num ***from, int *dest, int *len)
 // rotate stack (up)
 void rotate(num ***arr, int len)
 {
+	moves++;
 	int i = 0;
 	if (len)
 	{
@@ -91,6 +94,7 @@ void rotate(num ***arr, int len)
 // reverse rotate stack (down)
 void reverse_rotate(num ***arr, int len)
 {
+	moves++;
 	int i = 0;
 	if (len)
 	{
@@ -113,17 +117,41 @@ void reverse_rotate(num ***arr, int len)
 	}
 }
 
+void swap(num **current, num **next, int len)
+{
+	// printf("%d: +%d -%d\n", (*current)->value, (*current)->next, (*current)->prev);
+	// printf("%d: +%d -%d\n", (*next)->value, (*next)->next, (*next)->prev);
+	printf("\nswap\n");
+	moves++;
+	num *tmp = *current;
+	*current = *next;
+	*next = tmp;
+	if ((*current)->next == len)
+		(*current)->next = 0;
+	(*current)->next++;
+	(*current)->prev = len - (*current)->next;
+
+	if ((*next)->prev == len)
+		(*next)->prev = 0;
+	(*next)->prev++;
+	(*next)->next = len - (*next)->prev;
+}
+
 // choose move
 int choose_move(num **list, int *len, int *stack_b)
 {
 	printf("\n============================================================\n");
 	int i = 0;
 	int step_prev = -1, step_next = -1;
+	// printf("%d, %d", list[0]->value, list[1]->value);
+	// exit(0);
 	while (i < *len)
 	{
+		if (*len > 0 && list[0]->value == list[1]->value - 1)
+			swap(list, list + 1, *len);
 		if (list[0]->prev == 0 || list[0]->next == 0)
 		{
-			printf("\npush %d to stack b", list[0]->value);
+			printf("\npush %d to stack b\n", list[0]->value);
 			push(&list, stack_b, len);
 		}
 		if (i - list[i]->prev == 0 || i + list[i]->next == *len)
@@ -132,15 +160,17 @@ int choose_move(num **list, int *len, int *stack_b)
 			step_next = list[i]->next;
 			step_prev = list[i]->prev;
 		}
+		if (*len > 0 && list[0]->value == list[1]->value - 1)
+			swap(list, list + 1, *len);
 		i++;
 	}
-	if (step_next <= step_prev && i > 0)
+	if (step_next <= step_prev && *len > 0)
 	{
 		printf("reverse rotate\n");
 		reverse_rotate(&list, *len);
 		return (0);
 	}
-	if (step_next > step_prev && i > 0)
+	if (step_next > step_prev && *len > 0)
 	{
 		printf("rotate\n");
 		rotate(&list, *len);
@@ -152,8 +182,9 @@ int choose_move(num **list, int *len, int *stack_b)
 // <- -
 int main(void)
 {
+	// verify array of 3 elements
 	int i;
-	int array0[] = {3,2,1};
+	int array0[] = {2,1,4,3,6};
 	int *array1 = ft_calloc(1, sizeof(array0)); // copy array0 in array1
 	int *stack_b = ft_calloc(1, sizeof(array0));
 	int *indexes = ft_calloc(1, sizeof(array0));	 // indexes container
@@ -214,8 +245,16 @@ int main(void)
 		printf("%d: +%d -%d | ", list[i]->value, list[i]->next, list[i]->prev);
 		i++;
 	}
-	printf("\n");
+	printf("\n\n");
 	//////////////////////////////////////////////////////////////////
+	// swap(list, list + 1);
+	// printf("\nafter swap\n");
+	// i = 0;
+	// while (i < len)
+	// {
+	// 	printf("%d: +%d -%d | ", list[i]->value, list[i]->next, list[i]->prev);
+	// 	i++;
+	// }
 	while (choose_move(list, &len, stack_b) == 0)
 	{
 		i = 0;
@@ -233,4 +272,6 @@ int main(void)
 		}
 		printf("\n");
 	}
+	printf("\n============================================================\n");
+	printf("number of moves: %d\n", moves);
 }
