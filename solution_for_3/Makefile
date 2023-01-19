@@ -1,7 +1,7 @@
 CC = cc
 SAN = -fsanitize=address -fsanitize=undefined -g3
 SRC = ""
-LIB = ./Libft/libft.a
+LIB = ../Libft/libft.a
 OUT = ./a.out
 RM = rm -rf
 
@@ -18,5 +18,7 @@ san:$(SRC)
 	@$(RM) $(OUT)
 clean:
 	@$(RM) $(OUT)
+git:
+	git add . && git commit -m "$(msg)" && git push 
 
 re: clean all
