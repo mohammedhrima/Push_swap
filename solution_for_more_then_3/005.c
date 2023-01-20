@@ -76,7 +76,7 @@ int len_a;
 int len_b;
 int len_t;
 
-// push to b
+// push
 void push(num **src, num **dest, int src_len)
 {
 	printf("push to b\n");
@@ -94,24 +94,6 @@ void push(num **src, num **dest, int src_len)
 		printf("verify len in push: %d\n", src_len);
 	}
 }
-// push to a
-void push_to_a(num **stack_b, num **stack_a)
-{
-	// printf("push to a\n");
-	if (len_b)
-	{
-		reverse_rotate(stack_a, len_t); // down
-		stack_a[0]->value = (stack_b)[0]->value;
-		stack_a[0]->index = (stack_b)[0]->index;
-		stack_b[0]->value = -1;
-		stack_b[0]->index = -1;
-		rotate(stack_b, len_t); // up
-	}
-	else
-	{
-		printf("verify len in push a: %d | b: %d\n", len_a, len_b);
-	}
-}
 
 // choose move , it sorts depends on array of index_start 0,1,2,3,....
 // it sorts regulary from bigger to smaller
@@ -121,16 +103,9 @@ int choose_move(num **stack_a, num **stack_b, int len_t)
 	while (i < len_t)
 	{
 		// printf("| %2d, from %2d to %2d || %2d, from %2d to %2d |\n", stack_a[i]->value, i, stack_a[i]->index, stack_b[i]->value, i, stack_b[i]->index);
-		if (stack_a[i]->index > len_t / 2)
-		{
-			// push_to_b(stack_a, stack_b);
-		}
-		printf("\n");
-		// if (i < (len_a) && stack_a[i])
-		printf("| a: %2d, from %2d to %2d |", stack_a[i]->value, i, stack_a[i]->index);
-		// if (i < (len_b) && stack_b[i])
-		printf("| b: %2d, from %2d to %2d |", stack_b[i]->value, i, stack_b[i]->index);
-
+		if (stack_a[0]->index > len_t / 2)
+			push(stack_a, stack_b, len_a);
+		
 		i++;
 	}
 	return (0);
@@ -143,7 +118,7 @@ int main(void)
 	// init array of numbers
 	// verify conflit between array0 and array1
 	int i;
-	int array0[] = {3, 24, 14, 12, 13, 5, 26};
+	int array0[] = {3, 2, 14, 12, 13, 5, 26};
 	int *array1 = ft_calloc(1, sizeof(array0));	   // used to copy array0 in heap
 	int len = (int)(sizeof(array0) / sizeof(int)); // len of array0
 	int push_len = len;
@@ -212,14 +187,9 @@ int main(void)
 		i++;
 	}
 	printf("\n==========end main==========\n");
-	// choose_move(stack_a, stack_b, push_len);
+	choose_move(stack_a, stack_b, push_len);
 	// push_to_b(stack_a, stack_b);
 	// push_to_b(stack_a, stack_b);
-
-	push(stack_a, stack_b, len_a);
-	push(stack_a, stack_b, len_a);
-	push(stack_b, stack_a, len_b);
-	push(stack_b, stack_a, len_b);
 
 	i = 0;
 	while (i < len)
