@@ -104,8 +104,12 @@ int choose_move(num **stack_a, num **stack_b, int len_t)
 	{
 		// printf("| %2d, from %2d to %2d || %2d, from %2d to %2d |\n", stack_a[i]->value, i, stack_a[i]->index, stack_b[i]->value, i, stack_b[i]->index);
 		if (stack_a[0]->index > len_t / 2)
+		{
 			push(stack_a, stack_b, len_a);
-		
+			len_a--;
+			len_b++;
+		}
+
 		i++;
 	}
 	return (0);
