@@ -43,3 +43,12 @@ the allowed moves:
 - method for 5 numbers
 - method for 100 numbers
 - method for 500 numbers
+
+
+- in push A to B:
+	copy first elemnt of A
+	rotate A up
+	rotate B down
+	put copyed number at the top of B
+	decrease A->lenght by 1
+	increase B->lenght by 1
