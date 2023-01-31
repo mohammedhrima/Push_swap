@@ -52,3 +52,8 @@ the allowed moves:
 	put copyed number at the top of B
 	decrease A->lenght by 1
 	increase B->lenght by 1
+
+x < 3 -> 3 moves
+5	<= x <=    8 ->	   12 moves
+100	<= x <=  700 ->	 1100 moves
+500	<= x <= 5500 -> 11500 moves

@@ -72,6 +72,7 @@ void push(stack *src, stack *dest)
 		dest->lenght++;
 		reverse_rotate(dest); // down
 		dest->array_of_nums[0] = tmp;
+		moves++;
 	}
 	else
 	{
@@ -103,7 +104,7 @@ void sort_stacks(stack *A, stack *B, int middle_index)
 			// printf("\n\"%d | %d\"\n", A->array_of_nums[j].value, A->array_of_nums[A->lenght - j - 1].value);
 			if (A->array_of_nums[j].index > middle_index)
 			{
-				//printf("r(%d) ", A->array_of_nums[j].value);
+				// printf("r(%d) ", A->array_of_nums[j].value);
 				rotate(A); // up
 				moves++;
 				break;
@@ -141,7 +142,7 @@ int main(void)
 	int i;
 	// int middle;
 
-	int const_array[] = {101, 0,102, 3, 4, 25, 1, 15, 10, 13, 2, 5, 100, 26, 11};
+	int const_array[] = {101, 0, 102, 3, 4, 25, 1, 15, 10, 13, 2, 5, 100, 26, 11};
 	int *array_of_indexes = ft_calloc(1, sizeof(const_array));
 	int *array_of_numbers = ft_calloc(1, sizeof(const_array));
 	int len = (int)(sizeof(const_array) / sizeof(int));
