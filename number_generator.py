@@ -1,4 +1,4 @@
 import random
-numbers = random.sample(range(2000), 100)
+numbers = random.sample(range(500), 90)
 print(numbers)
 
