@@ -59,7 +59,7 @@ void check_repetetive_numbers(int *array, int len)
 		{
 			if (array[i] == array[j])
 			{
-				printf("Error: there is repetetive number\n");
+				ft_printf("Error: there is repetetive number\n");
 				exit(0);
 			}
 			j++;
@@ -123,7 +123,7 @@ int push(stack *src, stack *dest)
 	}
 	else
 	{
-		printf("\n\"verify src len in push\"\n");
+		ft_printf("\n\"verify src len in push\"\n");
 		return (0);
 	}
 }
@@ -197,7 +197,7 @@ void is_sorted(stack *A)
 	while (i < A->lenght)
 	{
 		if (A->array_of_nums[i].index > A->array_of_nums[i - 1].index)
-			printf("\033[0;31mwa elchriff verify dakchi 3endek\n");
+			ft_printf("\033[0;31mwa elchriff verify dakchi 3endek\n");
 		i++;
 	}
 }
@@ -206,291 +206,37 @@ void sort_3(stack *X, char c)
 {
 	int i = 0;
 	if (X->lenght <= 1)
-		printf("\nverify length in sort\n");
+		ft_printf("\nverify length in sort\n");
 	if (X->lenght > 1 && X->array_of_nums[0].index == X->array_of_nums[1].index + 1)
 	{
-		printf("s%c ", c);
+		ft_printf("s%c ", c);
 		swap(X);
 		moves++;
 	}
 	if (X->lenght > 2)
 	{
 		int n = get_distance(X->array_of_nums);
-		//	printf("\nn: %d\n", n);
 		if (n == 3)
 		{
-			printf("r%c ", c);
+			ft_printf("r%c ", c);
 			rotate(X);
 			moves++;
 		}
 		if (n == 5)
 		{
-			printf("rr%c ", c);
+			ft_printf("rr%c ", c);
 			reverse_rotate(X);
 			moves++;
 		}
 		if (X->array_of_nums[0].index == X->array_of_nums[1].index + 1)
 		{
-			printf("s%c ", c);
+			ft_printf("s%c ", c);
 			swap(X);
 		}
 	}
 }
 
 // be aware that a lenght change all the time
-void sort1(stack *A, stack *B, int len)
-{
-	printf("    len/4: %d\n", len / 4);
-	printf("    len/2: %d\n", len / 2);
-	printf("3*(len/4): %d\n", 3 * (len / 4));
-	printf("      len: %d\n", len);
-	int ra = 0;
-	int rb = 0;
-	int p = 0;
-	printf("\n1st while loop\n");
-	while (B->lenght < len / 2)
-	{
-		ra = 0;
-		rb = 0;
-		if (A->array_of_nums[0].index >= len / 4 && A->array_of_nums[0].index < 3 * (len / 4))
-		{
-			if (A->array_of_nums[0].index >= len / 2)
-				rb++;
-			moves += push(A, B);
-			printf("p ");
-			if (rb)
-				rb = rotate(B); // rotate cna ruturn 0 if len is les than 2
-		}
-		else
-			ra = rotate(A);
-		if (ra && rb)
-		{
-			printf("rr ");
-			moves++;
-		}
-		else
-		{
-			ra &&printf("ra ");
-			rb &&printf("rb ");
-			moves += (ra + rb);
-		}
-	}
-	printf("\n2nd while loop\n");
-	while (B->lenght < len)
-	{
-		ra = 0;
-		rb = 0;
-		if (A->array_of_nums[0].index >= 3 * (len / 4) || A->array_of_nums[0].index < len / 4)
-		{
-			if (A->array_of_nums[0].index >= len / 2)
-				rb++;
-			moves += push(A, B);
-			printf("p ");
-			if (rb)
-				rb = rotate(B); // rotate can ruturn 0 if len is les than 2
-		}
-		else
-			ra = rotate(A);
-		if (ra && rb)
-		{
-			printf("rr ");
-			moves++;
-		}
-		else
-		{
-			ra &&printf("ra ");
-			rb &&printf("rb ");
-			moves += (ra + rb);
-		}
-	}
-}
-void sort2(stack *A, stack *B, int len)
-{
-	printf("01*(len/16): %d\n", len / 16);
-	printf("02*(len/16): %d\n", 2 * (len / 16));
-	printf("03*(len/16): %d\n", 3 * (len / 16));
-	printf("04*(len/16): %d\n", 4 * (len / 16));
-	printf("05*(len/16): %d\n", 5 * (len / 16));
-	printf("06*(len/16): %d\n", 6 * (len / 16));
-	printf("07*(len/16): %d\n", 7 * (len / 16));
-	printf("08*(len/16): %d\n", 8 * (len / 16));
-	printf("09*(len/16): %d\n", 9 * (len / 16));
-	printf("10*(len/16): %d\n", 10 * (len / 16));
-	printf("11*(len/16): %d\n", 11 * (len / 16));
-	printf("12*(len/16): %d\n", 12 * (len / 16));
-	printf("13*(len/16): %d\n", 13 * (len / 16));
-	printf("14*(len/16): %d\n", 14 * (len / 16));
-	printf("15*(len/16): %d\n", 15 * (len / 16));
-	printf("16*(len/16): %d\n\n", len);
-	int ra = 0;
-	int rb = 0;
-	int p = 0;
-	printf("\n1st while loop\n");
-	while (B->lenght < len / 4) // 3/8 -> 5/8
-	{
-		ra = 0;
-		rb = 0;
-		if (A->array_of_nums[0].index >= 3 * (len / 8) && A->array_of_nums[0].index < 5 * (len / 8))
-		{
-			if (A->array_of_nums[0].index >= len / 2)
-				rb++;
-			moves += push(A, B);
-			printf("p ");
-			if (rb)
-				rb = rotate(B); // rotate cna ruturn 0 if len is les than 2
-		}
-		else
-			ra = rotate(A);
-		if (ra && rb)
-		{
-			printf("rr ");
-			moves++;
-		}
-		else
-		{
-			ra &&printf("ra ");
-			rb &&printf("rb ");
-			moves += (ra + rb);
-		}
-	}
-	printf("\n2nd while loop\n");
-	while (B->lenght < len / 2) // 1/4 -> 3/4
-	{
-		ra = 0;
-		rb = 0;
-		if (A->array_of_nums[0].index >= len / 4 && A->array_of_nums[0].index < 3 * (len / 4))
-		{
-			if (A->array_of_nums[0].index >= len / 2)
-				rb++;
-			moves += push(A, B);
-			printf("p ");
-			if (rb)
-				rb = rotate(B); // rotate cna ruturn 0 if len is les than 2
-		}
-		else
-			ra = rotate(A);
-		if (ra && rb)
-		{
-			printf("rr ");
-			moves++;
-		}
-		else
-		{
-			ra &&printf("ra ");
-			rb &&printf("rb ");
-			moves += (ra + rb);
-		}
-	}
-	printf("\n3rd while loop\n");
-	while (B->lenght < 3 * (len / 4)) // 1/8 -> 7/8
-	{
-		ra = 0;
-		rb = 0;
-		if (A->array_of_nums[0].index >= len / 8 && A->array_of_nums[0].index < 7 * (len / 8))
-		{
-			if (A->array_of_nums[0].index >= len / 2)
-				rb++;
-			moves += push(A, B);
-			printf("p ");
-			if (rb)
-				rb = rotate(B); // rotate can ruturn 0 if len is les than 2
-		}
-		else
-			ra = rotate(A);
-		if (ra && rb)
-		{
-			printf("rr ");
-			moves++;
-		}
-		else
-		{
-			ra &&printf("ra ");
-			rb &&printf("rb ");
-			moves += (ra + rb);
-		}
-	}
-	printf("\n4th while loop\n");
-	while (B->lenght < len) // 0 -> 1
-	{
-		ra = 0;
-		rb = 0;
-		if (A->array_of_nums[0].index >= 7 * (len / 8) || A->array_of_nums[0].index < len)
-		{
-			if (A->array_of_nums[0].index >= len / 2)
-				rb++;
-			moves += push(A, B);
-			printf("p ");
-			if (rb)
-				rb = rotate(B); // rotate can ruturn 0 if len is les than 2
-		}
-		else
-			ra = rotate(A);
-		if (ra && rb)
-		{
-			printf("rr ");
-			moves++;
-		}
-		else
-		{
-			ra &&printf("ra ");
-			rb &&printf("rb ");
-			moves += (ra + rb);
-		}
-	}
-}
-
-void sort3(stack *A, stack *B, int len)
-{
-	printf("len: %d\n", len);
-	printf("01*(len/3): %d\n", len / 3);
-	printf("02*(len/3): %d\n", 2 * (len / 3));
-	printf("03*(len/3): %d\n", 3 * (len / 3));
-
-	int ra = 0;
-	int rb = 0;
-	int p = 0;
-
-	printf("\n1st while loop\n");
-	float min = 14 * (len / 27);
-	float max = 14 * (len / 27);
-
-	float len2;
-	len2 = 0;
-	while (min > 0 && max < len)
-	{
-		min -= (len / 27);
-		max += (len / 27);
-		len2 = (int)max - (int)min;
-		while (B->lenght < (int)len2) // 3/8 -> 5/8
-		{
-			ra = 0;
-			rb = 0;
-			if (A->array_of_nums[0].index >= min && A->array_of_nums[0].index <= max)
-			{
-				if (A->array_of_nums[0].index >= len / 2)
-					rb++;
-				moves += push(A, B);
-				printf("p ");
-				if (rb)
-					rb = rotate(B); // rotate cna ruturn 0 if len is les than 2
-			}
-			else
-				ra = rotate(A);
-			if (ra && rb)
-			{
-				printf("rr ");
-				moves++;
-			}
-			else
-			{
-				ra &&printf("ra ");
-				rb &&printf("rb ");
-				moves += (ra + rb);
-			}
-		}
-	}
-	printf("\n\non exit:\nmin:%f\nmax:%f\nlen: %d\n", min, max, len);
-}
 
 void sort4(stack *A, stack *B, int len)
 {
@@ -502,13 +248,13 @@ void sort4(stack *A, stack *B, int len)
 	float len2 = 0;
 	float len3 = 0;
 	int spliter;
-	if (len < 250)
+	// if (len < 250)
 		spliter = 8;
 
 	min = (float)len / 2; // for 2n
 	max = (float)len / 2; // for 2nd
 	len2 = max - min;
-	printf("\nstart:\nB.lenght = %d\nmin = %f\nmax = %f\nlen2 = %f\n\n\n", B->lenght, min, max, len2);
+	// printf("\nstart:\nB.lenght = %d\nmin = %f\nmax = %f\nlen2 = %f\n\n\n", B->lenght, min, max, len2);
 	while (max - min < len)
 	{
 		min -= (float)len / spliter;
@@ -532,10 +278,10 @@ void sort4(stack *A, stack *B, int len)
 		}
 	}
 	int i = 0;
-	printf("\nafter first sort\n");
-	mysleep(6);
-	printstacks(A, B, len);
-	printf("\n");
+	// printf("\nafter first sort\n");
+	// mysleep(6);
+	// printstacks(A, B, len);
+	// printf("\n");
 	int to_push_index = 0;
 	i = 0;
 	while (A->lenght < len)
@@ -573,7 +319,7 @@ void sort4(stack *A, stack *B, int len)
 int main(void)
 {
 	int i;
-	int const_array[] = {12, 209, 444, 452, 325, 86, 438, 242, 64, 463, 117, 485, 345, 286, 232, 237, 382, 250, 73, 70, 11, 142, 0, 341, 217, 254, 373, 308, 486, 320, 319, 280, 197, 104, 231, 275, 46, 255, 126, 193, 31, 302, 166, 112, 162, 355, 292, 492, 59, 52, 396, 328, 478, 150, 334, 101, 263, 432, 132, 207, 136, 131, 296, 47, 371, 219, 196, 349, 459, 272, 19, 90, 188, 381, 245, 417, 491, 398, 291, 108, 379, 391, 380, 372, 244, 333, 358, 129, 125, 347, 32, 377, 175, 8, 66, 441, 176, 326, 48, 137};
+	int const_array[] = {709, 896, 356, 367, 748, 229, 130, 422, 761, 525, 528, 464, 281, 624, 655, 676, 869, 554, 967, 662, 478, 597, 309, 480, 723, 858, 920, 337, 440, 961, 877, 636, 370, 466, 825, 186, 992, 98, 382, 871, 911, 972, 643, 334, 913, 984, 223, 379, 672, 61, 584, 788, 518, 120, 732, 628, 305, 685, 50, 46, 135, 621, 300, 932, 496, 757, 386, 531, 738, 908, 714, 921, 140, 74, 592, 357, 299, 951, 758, 657, 476, 137, 990, 596, 502, 196, 182, 16, 749, 840, 550, 879, 322, 930, 13, 465, 277, 559, 933, 73};
 	int *array_of_indexes = ft_calloc(1, sizeof(const_array));
 	int *array_of_numbers = ft_calloc(1, sizeof(const_array));
 	int len = (int)(sizeof(const_array) / sizeof(int));

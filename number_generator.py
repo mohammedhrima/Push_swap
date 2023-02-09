@@ -1,4 +1,4 @@
 import random
-numbers = random.sample(range(500), 100)
+num = int(input("Enter you range :"))
+numbers = random.sample(range(10 * num), num)
 print(numbers)
-
