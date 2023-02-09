@@ -163,26 +163,26 @@ num *min(stack *X)
 
 int printstacks(stack *A, stack *B, int len)
 {
-	mysleep(4);
-	printf("\n=============================================================\n");
-	int j = 0;
-	j = 0;
-	printf("stack A\n");
-	while (j < A->lenght)
-	{
-		printf("%4d ", A->array_of_nums[j++].index);
-		if (j % (len / 8) == 0)
-			printf("|\n");
-	}
-	j = 0;
-	printf("\nstack B\n");
-	while (j < B->lenght)
-	{
-		printf("%4d ", B->array_of_nums[j++].index);
-		if (j % (len / 8) == 0)
-			printf("|\n");
-	}
-	printf("\n=============================================================\n");
+	// mysleep(5);
+	// printf("\n=============================================================\n");
+	// int j = 0;
+	// j = 0;
+	// printf("stack A\n");
+	// while (j < A->lenght)
+	// {
+	// 	printf("%4d ", A->array_of_nums[j++].index);
+	// 	if (j % (len / 8) == 0)
+	// 		printf("|\n");
+	// }
+	// j = 0;
+	// printf("\nstack B\n");
+	// while (j < B->lenght)
+	// {
+	// 	printf("%4d ", B->array_of_nums[j++].index);
+	// 	if (j % (len / 8) == 0)
+	// 		printf("|\n");
+	// }
+	// printf("\n=============================================================\n");
 	return (1);
 }
 
@@ -266,7 +266,7 @@ void sort4(stack *A, stack *B, int len)
 			if (A->array_of_nums[0].index >= min && A->array_of_nums[0].index < max)
 			{
 				moves += push(A, B);
-				ft_printf("p ");
+				ft_printf("pb ");
 				if (B->array_of_nums[0].index >= len / 2)
 					rb = rotate(B); // rotate cna ruturn 0 if len is les than 2
 			}
@@ -311,7 +311,7 @@ void sort4(stack *A, stack *B, int len)
 		{
 			moves += push(B, A);
 			to_push_index++;
-			ft_printf("p ") && printstacks(A, B, len);
+			ft_printf("pa ") && printstacks(A, B, len);
 		}
 	}
 }
@@ -319,7 +319,7 @@ void sort4(stack *A, stack *B, int len)
 int main(void)
 {
 	int i;
-	int const_array[] = {709, 896, 356, 367, 748, 229, 130, 422, 761, 525, 528, 464, 281, 624, 655, 676, 869, 554, 967, 662, 478, 597, 309, 480, 723, 858, 920, 337, 440, 961, 877, 636, 370, 466, 825, 186, 992, 98, 382, 871, 911, 972, 643, 334, 913, 984, 223, 379, 672, 61, 584, 788, 518, 120, 732, 628, 305, 685, 50, 46, 135, 621, 300, 932, 496, 757, 386, 531, 738, 908, 714, 921, 140, 74, 592, 357, 299, 951, 758, 657, 476, 137, 990, 596, 502, 196, 182, 16, 749, 840, 550, 879, 322, 930, 13, 465, 277, 559, 933, 73};
+	int const_array[] = { 322, 930, 13, 465, 277, 559, 933, 73};
 	int *array_of_indexes = ft_calloc(1, sizeof(const_array));
 	int *array_of_numbers = ft_calloc(1, sizeof(const_array));
 	int len = (int)(sizeof(const_array) / sizeof(int));

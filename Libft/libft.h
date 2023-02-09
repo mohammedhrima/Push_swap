@@ -6,7 +6,7 @@
 /*   By: mhrima <mhrima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 10:45:22 by mhrima            #+#    #+#             */
-/*   Updated: 2023/01/14 01:19:07 by mhrima           ###   ########.fr       */
+/*   Updated: 2023/02/09 07:06:06 by mhrima           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 t_list				*ft_lstnew(void *content);
 int					ft_lstsize(t_list *lst);
+int					ft_arrlen(char **arr);
 
 #endif

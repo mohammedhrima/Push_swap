@@ -88,3 +88,5 @@ and   %3 == 0
 handle who can be splited to 2
 handle who can be splited to 3 handle it with :
 	x = x/2 + x % 2
+
+verify all pointers
