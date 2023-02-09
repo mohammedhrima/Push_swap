@@ -81,4 +81,10 @@ for 5 <= x <= 8:
 
 
 // at the remove structs that contains value and index and keep the index
-handle other than 96
+
+split %2 == 0
+and   %3 == 0
+
+handle who can be splited to 2
+handle who can be splited to 3 handle it with :
+	x = x/2 + x % 2

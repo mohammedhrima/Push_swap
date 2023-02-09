@@ -7,7 +7,7 @@
 #define EQUAL ==
 #define PRINT ft_printf
 #define IF
-
+int main_spliter = 0;
 int moves = 0;
 void swap_array(int *x, int *y)
 {
@@ -16,6 +16,13 @@ void swap_array(int *x, int *y)
 	tmp = *x;
 	*x = *y;
 	*y = tmp;
+}
+
+void mysleep(int time)
+{
+	float q = 0.001;
+	while (q < time * 10000)
+		q += 0.002;
 }
 
 void sort_array(int *array_of_numbers, int *array_of_indexes, int len)
@@ -547,21 +554,48 @@ void sort4(stack *A, stack *B, int len)
 			rb && !ra && printf("rb ") && moves++;
 		}
 	}
-#elif 1
-	if (len % 2 == 0)
+#elif 0
+	if (len % 2 == 0) // this rule is always true // do < 1
 	{
-		int len3 = len / 2;
-		if (len3 % 2 == 0)
+		int spliter;
+		printf("\n\"split to 2 range of %d\"\n", len / 2);
+		main_spliter = 2;
+		spliter = 2;
+		if (len % 4 == 0)
 		{
-			
-			min = (float)len / 2 - len3 / 2; // for 2n
-			max = (float)len / 2 + len3 / 2; // for 2nd
+			spliter = 4;
+			printf("\n\"split to 4 range of %d\"\n", len / 4);
+			main_spliter = 4;
+			if (len % 8 == 0)
+			{
+				printf("\n\"split to 8 range of %d\"\n", len / 8);
+				spliter = 8;
+				main_spliter = 8;
+				if (len % 16 == 0)
+				{
+					// printf("\n\"split to 16 range of %d\"\n", len / 16);
+					// spliter = 16;
+					// main_spliter = 16;
+					// if (len % 32 == 0)
+					// {
+					// 	printf("\n\"split to 32 range of %d\"\n", len / 32);
+					// 	spliter = 32;
+					// 	main_spliter = 32;
+					// }
+				}
+			}
+		}
 
-			len2 = max - min;
-			printf("\nstart 1:\nA.lenght = %d\nB.lenght = %d\nmin = %f\nmax = %f\nlen2 = %f\n\n", A->lenght, B->lenght, min, max, len2);
-			//	exit(0);
-			// the start
-			while (B->lenght < len2)
+		// the end
+		// the midle - step
+		// spliter = 2;
+		min = (float)len / 2 - (float)len / spliter; // for 2nd
+		max = (float)len / 2 + (float)len / spliter; // for 2nd
+		//////////////////////////////////////////////////
+		printf("\n\nstart :\nA.lenght = %d\nB.lenght = %d\nmin = %f\nmax = %f\nnew B.lenght = %f\n\n", A->lenght, B->lenght, min, max, max - min);
+		while (max - min <= len)
+		{
+			while (B->lenght < (max - min))
 			{
 				ra = 0;
 				rb = 0;
@@ -569,8 +603,8 @@ void sort4(stack *A, stack *B, int len)
 				{
 					moves += push(A, B);
 					printf("p ");
-					if (B->array_of_nums[0].index >= (min + max) / 2) // hna kayna l3eyba
-						rb = rotate(B);								  // rotate cna ruturn 0 if len is les than 2
+					if (B->array_of_nums[0].index < (min + max) / 2)
+						rb = rotate(B); // rotate can ruturn 0 if len is les than 2
 				}
 				else
 					ra = rotate(A);
@@ -578,83 +612,190 @@ void sort4(stack *A, stack *B, int len)
 				ra && !rb && printf("ra ") && moves++;
 				rb && !ra && printf("rb ") && moves++;
 			}
+			min = min - (float)len / spliter; // for 2nd
+			max = max + (float)len / spliter; // for 2nd
 		}
-		else
-			printf("\n\"split to two\"\n");
+	}
+#elif 0
+	if (len % 2 == 0) // this rule is always true // do < 1
+	{
+		int spliter;
+		printf("\n\"split to 2 range of %d\"\n", len / 2);
+		main_spliter = 2;
+		spliter = 2;
+		if (len % 4 == 0)
+		{
+			spliter = 4;
+			printf("\n\"split to 4 range of %d\"\n", len / 4);
+			main_spliter = 4;
+			if (len % 8 == 0)
+			{
+				// printf("\n\"split to 8 range of %d\"\n", len / 8);
+				// spliter = 8;
+				// main_spliter = 8;
+			}
+		}
 
 		// the end
-		min = 0;		  // for 2n
-		max = (float)len; // for 2nd
-		len2 = max - min;
-		printf("\n\nstart 2:\nA.lenght = %d\nB.lenght = %d\nmin = %f\nmax = %f\nlen2 = %f\n\n", A->lenght, B->lenght, min, max, len2);
-		while (B->lenght < len2)
-		{
-			ra = 0;
-			rb = 0;
-			if (A->array_of_nums[0].index >= min && A->array_of_nums[0].index < max)
-			{
-				moves += push(A, B);
-				printf("p ");
-				if (B->array_of_nums[0].index >= (min + max) / 2)
-					rb = rotate(B); // rotate cna ruturn 0 if len is les than 2
-			}
-			else
-				ra = rotate(A);
-			ra &&rb &&printf("rr ") && moves++;
-			ra && !rb && printf("ra ") && moves++;
-			rb && !ra && printf("rb ") && moves++;
-		}
-	}
-#elif 1
-	if (len % 2 == 0)
-	{
-		len2 =
-			min = len / 4;		  // for 2n
-		max = 3 * (float)len / 4; // for 2nd
-		len2 = max - min;
-		printf("\nstart:\nB.lenght = %d\nmin = %f\nmax = %f\nlen2 = %f\n\n\n", B->lenght, min, max, len2);
-		while (B->lenght < len2)
-		{
-			ra = 0;
-			rb = 0;
-			if (A->array_of_nums[0].index >= min && A->array_of_nums[0].index < max)
-			{
-				moves += push(A, B);
-				printf("p ");
-				if (B->array_of_nums[0].index >= (min + max) / 2)
-					rb = rotate(B); // rotate cna ruturn 0 if len is les than 2
-			}
-			else
-				ra = rotate(A);
-			ra &&rb &&printf("rr ") && moves++;
-			ra && !rb && printf("ra ") && moves++;
-			rb && !ra && printf("rb ") && moves++;
-		}
-	}
-#elif 1
-	if (len % 2 == 0)
-	{
+		// the midle - step
+		// spliter = 2;
 
-		min = len / 4;			  // for 2n
-		max = 3 * (float)len / 4; // for 2nd
-		len2 = max - min;
-		printf("\nstart:\nB.lenght = %d\nmin = %f\nmax = %f\nlen2 = %f\n\n\n", B->lenght, min, max, len2);
-		while (B->lenght < len2)
+		//	spliter *= 2;
+		len2 = 0;
+		float step = (float)len / (spliter);
+		//////////////////////////////////////////////////
+		// printf("\n\nstart :\nA.lenght = %d\nB.lenght = %d\nmin = %f\nmax = %f\nnew B.lenght = %f\n\n", A->lenght, B->lenght, min1, max, max - min1);
+		printf("step is %f\n", step);
+		printf("limit1 %f / %d | limit2 %f / %d \n", (len - step / 2), (int)(len - step / 2), step / 2, (int)step / 2);
+		int i = 0;
+		while ((int)len2 < len)
 		{
-			ra = 0;
-			rb = 0;
-			if (A->array_of_nums[0].index >= min && A->array_of_nums[0].index < max)
+			len2 = len2 + (float)len / (spliter);
+			// printf("len2: %f\n", len2);
+			// exit(0);
+
+			while (B->lenght < (int)len2)
 			{
-				moves += push(A, B);
-				printf("p ");
-				if (B->array_of_nums[0].index >= (min + max) / 2)
-					rb = rotate(B); // rotate cna ruturn 0 if len is les than 2
+				ra = 0;
+				rb = 0;
+				if (
+					((A->array_of_nums[0].index >= 0) && (A->array_of_nums[0].index < step / 2)) ||
+					((A->array_of_nums[0].index >= (int)(len - step / 2)) && (A->array_of_nums[0].index < (int)(len))))
+				{
+					moves += push(A, B);
+					printf("p ");
+					// if (B->array_of_nums[0].index % 12 >= 3)
+					// 	rb = reverse_rotate(B); // rotate can ruturn 0 if len is les than 2
+				}
+				else
+					ra = rotate(A);
+				ra &&rb &&printf("rr ") && moves++;
+				ra && !rb && printf("ra ") && moves++;
+				rb && !ra && printf("rb ") && moves++;
+
+				i++;
+			}
+			step += (float)len / (spliter);
+		}
+		while (A->lenght < len / 2)
+		{
+			if (B->array_of_nums[0].index < len / 2)
+			{
+				moves += push(B, A);
+				moves += rotate(A);
 			}
 			else
-				ra = rotate(A);
-			ra &&rb &&printf("rr ") && moves++;
-			ra && !rb && printf("ra ") && moves++;
-			rb && !ra && printf("rb ") && moves++;
+				moves += rotate(B);
+		}
+		while (A->lenght < len)
+		{
+			moves += push(B, A);
+		}
+	}
+#elif 1
+	if (len % 2 == 0)
+	{
+		min = (float)len / 2; // for 2n
+		max = (float)len / 2; // for 2nd
+		len2 = max - min;
+		printf("\nstart:\nB.lenght = %d\nmin = %f\nmax = %f\nlen2 = %f\n\n\n", B->lenght, min, max, len2);
+		while (max - min < len)
+		{
+			min -= (float)len / 8;
+			max += (float)len / 8;
+			while (B->lenght < max - min)
+			{
+				ra = 0;
+				rb = 0;
+				if (A->array_of_nums[0].index >= min && A->array_of_nums[0].index < max)
+				{
+					moves += push(A, B);
+					ft_printf("p ");
+					if (B->array_of_nums[0].index >= len / 2)
+						rb = rotate(B); // rotate cna ruturn 0 if len is les than 2
+				}
+				else
+					ra = rotate(A);
+				ra &&rb &&ft_printf("rr ") && moves++;
+				ra && !rb && ft_printf("ra ") && moves++;
+				rb && !ra && ft_printf("rb ") && moves++;
+			}
+		}
+		int i = 0;
+		printf("\n");
+		while (i < B->lenght)
+		{
+			printf("%4d ", B->array_of_nums[i++].index);
+			if (i % (B->lenght / 8) == 0)
+				printf("/\n");
+		}
+		printf("\n");
+
+		// exit(0);
+		int to_push_index = 0;
+		i = 0;
+		while (A->lenght < len)
+		{
+			i = 0;
+			// mysleep();
+			// ft_printf("seach for index=%d in B, B.lenght=%d, B->array_of_nums[B->lenght - i - 1].index=%d\n", to_push_index, B->lenght , B->array_of_nums[B->lenght - i - 1].index);
+			while (i < B->lenght / 2 && B->array_of_nums[i].index != to_push_index && B->array_of_nums[B->lenght - i - 1].index != to_push_index)
+			{
+				// ft_printf("a -> i:%d, B.lenght:%d\n", i, B->lenght);
+				// mysleep();
+				i++;
+			}
+			if (B->array_of_nums[i].index == to_push_index)
+			{
+				// ft_printf("b -> i:%d, index is %d\n", i, B->array_of_nums[i].index);
+				// mysleep();
+				while (i > 0)
+				{
+					i -= rotate(B);
+					moves++;
+				}
+				// printf("wsalt 1 index: %d\n", B->array_of_nums[0].index);
+				// exit(0);
+			}
+			else if (B->array_of_nums[B->lenght - i - 1].index == to_push_index)
+			{
+				// ft_printf("c -> i:%d, index is %d\n", i, B->array_of_nums[i].index);
+				// mysleep();
+				while (i >= 0)
+				{
+					i -= reverse_rotate(B);
+					moves++;
+				}
+				// printf("wsalt 2 index: %d\n", B->array_of_nums[0].index);
+				// exit(0);
+			}
+			if (B->array_of_nums[0].index == to_push_index)
+			{
+				// ft_printf("push %d to A \n", B->array_of_nums[0].index);
+				mysleep(6);
+				// mysleep();
+				moves += push(B, A);
+				to_push_index++;
+				printf("\n====================================================\n");
+				int j = 0;
+				j = 0;
+				printf("stack A\n");
+				while (j < A->lenght)
+				{
+					printf("%4d ", A->array_of_nums[j++].index);
+					if (j % (len / 8) == 0)
+						printf("|\n");
+				}
+				j = 0;
+				printf("\nstack B\n");
+				while (j < B->lenght)
+				{
+					printf("%4d ", B->array_of_nums[j++].index);
+					if (j % (len / 8) == 0)
+						printf("|\n");
+				}
+				printf("\n====================================================\n");
+			}
 		}
 	}
 #else
@@ -776,7 +917,7 @@ void sort4(stack *A, stack *B, int len)
 int main(void)
 {
 	int i;
-	int const_array[] = {221, 213, 376, 2, 23, 242, 469, 299, 384, 185, 457, 175, 173, 380, 200, 363, 309, 191, 326, 254, 156, 369, 50, 208, 418, 112, 222, 147, 123, 414, 46, 110, 183, 495, 216, 115, 387, 119, 77, 70, 129, 419, 460, 385, 93, 225, 21, 281, 334, 366, 178, 186, 18, 231, 261, 331, 269, 248, 456, 289, 135, 291, 138, 151, 307, 393, 412, 108, 201, 56, 245, 404, 224, 378, 388, 27, 214, 421, 415, 240, 89, 122, 230, 139, 482, 58, 413, 96, 219, 353, 337, 298};
+	int const_array[] = {207, 449, 397, 80, 36, 173, 15, 476, 278, 294, 469, 123, 309, 360, 174, 226, 269, 348, 120, 393, 71, 37, 3, 330, 296, 266, 19, 389, 222, 428, 368, 47, 273, 67, 444, 167, 46, 337, 45, 251, 95, 256, 314, 401, 253, 417, 20, 70, 244, 26, 487, 394, 456, 274, 268, 146, 317, 184, 431, 158, 91, 371, 416, 230, 189, 405, 66, 287, 407, 69, 440, 7, 483, 223, 38, 111, 76, 272, 126, 98, 64, 249, 399, 433, 132, 43, 261, 234, 50, 9, 387, 131, 144, 326, 151, 343, 478, 201, 51, 413};
 	int *array_of_indexes = ft_calloc(1, sizeof(const_array));
 	int *array_of_numbers = ft_calloc(1, sizeof(const_array));
 	int len = (int)(sizeof(const_array) / sizeof(int));
@@ -810,7 +951,6 @@ int main(void)
 		i++;
 	}
 
-	printf("\n=========== MAIN ===========\n");
 	sort_array(array_of_numbers, array_of_indexes, len);
 	// feed indexes
 	i = 0;
@@ -823,19 +963,19 @@ int main(void)
 	// sort1(A, B, len);
 	// sort2(A, B, len);
 	sort4(A, B, len);
-
-	printf("\n\nafter sorting\nA: \n");
+	printf("\n\n\n=========== MAIN ===========\n");
+	printf("\nafter sorting\nA: \n");
 	i = 0;
 	// while (i < A->lenght)
 	// 	printf("%4d ", A->array_of_nums[i++].value);
 	// printf("\nin:");
 	i = 0;
-	int spliter = 4;
+	// int ranges = len / main_spliter;
 	while (i < A->lenght)
 	{
 		printf("%4d ", A->array_of_nums[i++].index);
-		if (i % (len / spliter) == 0)
-			printf("\n");
+		if (i % (A->lenght / 8) == 0)
+			printf("/\n");
 	}
 	printf("\nB: \n");
 	// i = 0;
@@ -846,15 +986,16 @@ int main(void)
 	// 		printf("\n");
 	// }
 	// printf("\nin:\n");
+
 	i = 0;
 	while (i < B->lenght)
 	{
 		printf("%4d ", B->array_of_nums[i++].index);
-		if (i % (len / spliter) == 0)
-			printf("\n");
+		if (i % (B->lenght / 8) == 0)
+			printf("/\n");
 	}
 	printf("\n\n");
-	printf("moves : %d\n\n", moves);
+	printf("moves : %d\nA.lenght : %d\nB.lenght: %d\n", moves, A->lenght, B->lenght);
 
 	return (0);
 }
