@@ -131,12 +131,12 @@ int swap(stack *X)
 int printstacks(stack *A, stack *B, int len, int moves)
 {
 #if 1
-	// if (len > 250)
-	// 	mysleep(1);
-	// else if (len > 50)
-	// 	mysleep(80);
-	// else if (len > 0)
-	// 	mysleep(300);
+	if (len > 250)
+		mysleep(2);
+	else if (len > 50)
+		mysleep(80);
+	else if (len > 0)
+		mysleep(300);
 
 	printf("\e[0;32m\n============================================================================\n");
 	int j = 0;
@@ -475,5 +475,6 @@ int main(int argc, char **argv)
 			printf("|\n");
 	}
 	printf("\n");
+	// system("leaks push_swap");
 	return (0);
 }

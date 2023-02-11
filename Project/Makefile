@@ -1,6 +1,6 @@
 CC = cc
 SAN = -fsanitize=address -fsanitize=undefined -g3
-SRC = "push_swap.c"
+SRC = push_swap.c
 LIB = ../Libft/libft.a
 OUT = ./push_swap
 RM = rm -rf
@@ -12,8 +12,10 @@ $(OUT):
 all: $(OUT)
 
 san:$(SRC)
-	@$(CC) $(SAN) $(LIB) $(SRC)
-	@$(OUT)
+	@$(CC) $(SAN) $(LIB) $(SRC) -o $(OUT)
+
+checker:
+
 
 test:
 	./tester/tester_push_swap.sh 1 100

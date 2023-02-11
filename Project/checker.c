@@ -163,13 +163,13 @@ char *readline(int fd)
 	char *res;
 	char *tmp;
 
-	char c[1];
+	char c;
 	res = NULL;
 	tmp = NULL;
-	j = read(fd, c, 1);
-	while (j && c[0] != '\n')
+	j = read(fd, &c, 1);
+	while (j && c != '\n')
 	{
-		tmp = ft_strjoin(res, c);
+		tmp = ft_strjoin(res, &c);
 		// free(res);
 		res = tmp;
 		j = read(fd, &c, 1);
@@ -371,5 +371,5 @@ int main(int argc, char **argv)
 	printf("A.lenght : %d\nB.lenght: %d\n", A->lenght, B->lenght);
 	is_sorted(A);
 	// my_free_all();
-	system("leaks a.out");
+	// system("leaks a.out");
 }
