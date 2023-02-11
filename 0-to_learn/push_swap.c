@@ -130,7 +130,7 @@ int swap(stack *X)
 
 int printstacks(stack *A, stack *B, int len, int moves)
 {
-#if 0
+#if 1
 	// if (len > 250)
 	// 	mysleep(2);
 	// else if (len > 50)
@@ -189,8 +189,8 @@ void sort_three(stack *X)
 	if (X->lenght > 2)
 	{
 		int n = get_distance(X->array_of_nums);
-		n == 3 && printf("ra ") && rotate(X) && moves++;
-		n == 5 && printf("rr ") && reverse_rotate(X) && moves++;
+		n == 3 && printf("ra\n") && rotate(X) && moves++;
+		n == 5 && printf("rr\n") && reverse_rotate(X) && moves++;
 		X->array_of_nums[0].index == X->array_of_nums[1].index + 1 && printf("sa ") && swap(X) && moves++;
 	}
 	printf("\n");
@@ -228,15 +228,15 @@ void sort_more(stack *A, stack *B, int len)
 			if (A->array_of_nums[0].index >= min && A->array_of_nums[0].index < max)
 			{
 				moves += push(A, B);
-				ft_printf("pb ");
+				ft_printf("pb\n");
 				if (B->array_of_nums[0].index < (max - min) / 2 + min)
 					rb = rotate(B);
 			}
 			else
 				ra = rotate(A);
-			ra &&rb &&ft_printf("rr ") && moves++ &&printstacks(A, B, len, moves);
-			ra && !rb && ft_printf("ra ") && moves++ && printstacks(A, B, len, moves);
-			rb && !ra && ft_printf("rb ") && moves++ && printstacks(A, B, len, moves);
+			ra &&rb &&ft_printf("rr\n") && moves++ &&printstacks(A, B, len, moves);
+			ra && !rb && ft_printf("ra\n") && moves++ && printstacks(A, B, len, moves);
+			rb && !ra && ft_printf("rb\n") && moves++ && printstacks(A, B, len, moves);
 		}
 		min += (len / precision);
 		max += (len / precision);
@@ -264,7 +264,6 @@ void sort_more(stack *A, stack *B, int len)
 				if (B->array_of_nums[0].index == max_len - 1)
 				{
 					moves += push(B, A);
-					ft_printf("pb ");
 					before_max_range = 1;
 				}
 				else
@@ -292,10 +291,9 @@ void sort_more(stack *A, stack *B, int len)
 			if (before_max_range)
 			{
 				moves += swap(A);
-				ft_printf("sa ");
 				max_len--;
 			}
-			ft_printf("pa ");
+			ft_printf("pa\n") && printstacks(A, B, len, moves);
 		}
 	}
 

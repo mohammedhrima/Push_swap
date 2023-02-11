@@ -77,7 +77,8 @@ typedef struct stack
 //  rotate (up)
 int rotate(stack *list)
 {
-	if (list->lenght > 1)
+	if(!list) printf("list is NULL");
+	else if (list && list->lenght > 1)
 	{
 		num tmp = list->array_of_nums[0];
 		ft_memmove(list->array_of_nums, list->array_of_nums + 1, (list->lenght - 1) * sizeof(num));
@@ -90,7 +91,8 @@ int rotate(stack *list)
 // reverse rotate (down)
 int reverse_rotate(stack *list)
 {
-	if (list->lenght > 1)
+	if(!list) printf("list is NULL");
+	else if (list && list->lenght > 1)
 	{
 		num tmp = list->array_of_nums[list->lenght - 1];
 		ft_memmove(list->array_of_nums + 1, list->array_of_nums, (list->lenght - 1) * sizeof(num));
@@ -116,6 +118,7 @@ int push(stack *src, stack *dest)
 	else
 	{
 		ft_printf("\n\"verify src len in push\"\n");
+		exit(0);
 		return (0);
 	}
 }
@@ -128,33 +131,6 @@ int swap(stack *X)
 	X->array_of_nums[1] = tmp;
 	return (1);
 }
-
-char **string(void)
-{
-	static char *str;
-
-	return (&str);
-}
-
-// int **array_of_numbers(void)
-// {
-// 	static int *numbers;
-
-// 	return (&numbers);
-// }
-
-// stack **stack_ptr(int index)
-// {
-// 	static stack **ptr;
-// 	if (ptr == NULL)
-// 		ptr = malloc(2 * sizeof(stack *));
-// 	if (index == 'A')
-// 		return (ptr[0]);
-// 	if (index == 'B')
-// 		return (ptr[1]);
-
-// 	return (NULL);
-// }
 
 char *readline(int fd)
 {
@@ -208,7 +184,6 @@ int main(int argc, char **argv)
 		ft_printf(" please provide more arguments\n");
 		exit(0);
 	}
-	// signal(SIGINT, handle_signal);
 
 	str = argv[1];
 	while (i < argc)
@@ -238,14 +213,6 @@ int main(int argc, char **argv)
 	}
 
 	i = 0;
-	// ft_printf("/");
-	// while (array[i])
-	// {
-	// 	// ft_printf("|%s|", array[i]);
-	// 	i++; //
-	// }
-	// ft_printf("/\n");
-	/////////////////////////////////////////////////////////////////
 	int len;
 	len = i;
 	len = ft_arrlen(array);
@@ -260,13 +227,7 @@ int main(int argc, char **argv)
 		i++;
 	}
 	i = 0;
-	// ft_printf("|");
-	// while (i < len)
-	// {
-	// 	ft_printf("|%d|", array_of_numbers[i]);
-	// 	i++;
-	// }
-	// ft_printf("|\n");
+
 	check_repetetive_numbers(array_of_numbers, len);
 	// create array of indexes
 	i = 0;
@@ -277,13 +238,13 @@ int main(int argc, char **argv)
 	}
 
 	// allocate stacks
-	stack *A = my_malloc(sizeof(stack));
-	stack *B = my_malloc(sizeof(stack));
+	stack *A = malloc(sizeof(stack));
+	stack *B = malloc(sizeof(stack));
 
-	A->array_of_nums = my_malloc(len * sizeof(num));
+	A->array_of_nums = malloc((len + 1) * sizeof(num));
 	A->lenght = len;
 
-	B->array_of_nums = my_malloc(len * sizeof(num));
+	B->array_of_nums = malloc((len + 1) * sizeof(num));
 	B->lenght = 0;
 
 	// feed stack A
@@ -305,30 +266,30 @@ int main(int argc, char **argv)
 	char *str1 = readline(0);
 	char *tmp;
 	int err = 0;
-	// while (str1)
-	// {
-	// 	if (ft_strcmp(str1, "sa") &&
-	// 		ft_strcmp(str1, "sb") &&
-	// 		ft_strcmp(str1, "ss") &&
-	// 		ft_strcmp(str1, "pa") &&
-	// 		ft_strcmp(str1, "pb") &&
-	// 		ft_strcmp(str1, "ra") &&
-	// 		ft_strcmp(str1, "rb") &&
-	// 		ft_strcmp(str1, "rr") &&
-	// 		ft_strcmp(str1, "rra") &&
-	// 		ft_strcmp(str1, "rrb") &&
-	// 		ft_strcmp(str1, "rrr"))
-	// 	{
-	// 		ft_printf("\nenter a valid move \"%s\"\n", str1);
-	// 		exit(1);
-	// 	}
-	// 	str0 = ft_strjoin(str0, str1);
-	// //	free(str1);
-	// 	tmp = ft_strjoin(str0, " ");
-	// //	free(str0);
-	// 	str0 = tmp;
-	// 	str1 = readline(0);
-	// }
+	while (str1)
+	{
+		if (ft_strcmp(str1, "sa") &&
+			ft_strcmp(str1, "sb") &&
+			ft_strcmp(str1, "ss") &&
+			ft_strcmp(str1, "pa") &&
+			ft_strcmp(str1, "pb") &&
+			ft_strcmp(str1, "ra") &&
+			ft_strcmp(str1, "rb") &&
+			ft_strcmp(str1, "rr") &&
+			ft_strcmp(str1, "rra") &&
+			ft_strcmp(str1, "rrb") &&
+			ft_strcmp(str1, "rrr"))
+		{
+			ft_printf("\nenter a valid move \"%s\"\n", str1);
+			exit(1);
+		}
+		str0 = ft_strjoin(str0, str1);
+		free(str1);
+		tmp = ft_strjoin(str0, " ");
+		free(str0);
+		str0 = tmp;
+		str1 = readline(0);
+	}
 	// if (err)
 	// 	exit(1);
 	// my_free(str1);
@@ -371,5 +332,5 @@ int main(int argc, char **argv)
 	printf("A.lenght : %d\nB.lenght: %d\n", A->lenght, B->lenght);
 	is_sorted(A);
 	// my_free_all();
-	// system("leaks a.out");
+	// system("leaks checker");
 }
