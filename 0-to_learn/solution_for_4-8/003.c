@@ -148,7 +148,7 @@ void sort_3(stack *X, char c)
 	}
 }
 // solution for 4 - 6
-void sort(stack *A, stack *B, int len)
+void sort_more(stack *A, stack *B, int len)
 {
 	int len_of_numbers_to_send_to_B = 0;
 	len_of_numbers_to_send_to_B = A->lenght - 3;
@@ -271,7 +271,7 @@ int main(void)
 		printf("%4d ", A->array_of_nums[i++].index);
 	printf("\n\n");
 	////////////////////////////////////////////////////////////////////////////////
-	sort(A, B, len);
+	sort_more(A, B, len);
 	printf("\n============================\n");
 	printf("A: ");
 	i = 0;

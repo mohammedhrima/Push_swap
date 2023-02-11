@@ -247,7 +247,7 @@ void sort_3(stack *X, char c)
 // }
 
 // be aware that a lenght change all the time
-void sort(stack *A, stack *B, int len)
+void sort_more(stack *A, stack *B, int len)
 {
 	printf("    len/4: %d\n", len / 4);
 	printf("    len/2: %d\n", len / 2);
@@ -346,7 +346,7 @@ int main(void)
 		i++;
 	}
 	// sort_3(A, 'a');
-	sort(A, B, len);
+	sort_more(A, B, len);
 
 	printf("\nafter sorting\nA: \n");
 	i = 0;

@@ -1,4 +1,4 @@
-#include "../../Libft/libft.h"
+#include "../Libft/libft.h"
 #include <signal.h>
 
 void swap_array(int *x, int *y)
@@ -167,15 +167,14 @@ char *readline(int fd)
 	res = NULL;
 	tmp = NULL;
 	j = read(fd, c, 1);
-	while (j && *c != '\n')
+	while (j && c[0] != '\n')
 	{
 		tmp = ft_strjoin(res, c);
-		free(res);
+		// free(res);
 		res = tmp;
 		j = read(fd, &c, 1);
 		if (j == 0)
 			break;
-		;
 		i++;
 		res[i] = '\0';
 	}
@@ -306,32 +305,32 @@ int main(int argc, char **argv)
 	char *str1 = readline(0);
 	char *tmp;
 	int err = 0;
-	while (str1)
-	{
-		if (ft_strcmp(str1, "sa") &&
-			ft_strcmp(str1, "sb") &&
-			ft_strcmp(str1, "ss") &&
-			ft_strcmp(str1, "pa") &&
-			ft_strcmp(str1, "pb") &&
-			ft_strcmp(str1, "ra") &&
-			ft_strcmp(str1, "rb") &&
-			ft_strcmp(str1, "rr") &&
-			ft_strcmp(str1, "rra") &&
-			ft_strcmp(str1, "rrb") &&
-			ft_strcmp(str1, "rrr"))
-		{
-			ft_printf("\nenter a valid move \"%s\"\n", str1);
-			exit(1);
-		}
-		str0 = ft_strjoin(str0, str1);
-		free(str1);
-		tmp = ft_strjoin(str0, " ");
-		free(str0);
-		str0 = tmp;
-		str1 = readline(0);
-	}
-	if (err)
-		exit(1);
+	// while (str1)
+	// {
+	// 	if (ft_strcmp(str1, "sa") &&
+	// 		ft_strcmp(str1, "sb") &&
+	// 		ft_strcmp(str1, "ss") &&
+	// 		ft_strcmp(str1, "pa") &&
+	// 		ft_strcmp(str1, "pb") &&
+	// 		ft_strcmp(str1, "ra") &&
+	// 		ft_strcmp(str1, "rb") &&
+	// 		ft_strcmp(str1, "rr") &&
+	// 		ft_strcmp(str1, "rra") &&
+	// 		ft_strcmp(str1, "rrb") &&
+	// 		ft_strcmp(str1, "rrr"))
+	// 	{
+	// 		ft_printf("\nenter a valid move \"%s\"\n", str1);
+	// 		exit(1);
+	// 	}
+	// 	str0 = ft_strjoin(str0, str1);
+	// //	free(str1);
+	// 	tmp = ft_strjoin(str0, " ");
+	// //	free(str0);
+	// 	str0 = tmp;
+	// 	str1 = readline(0);
+	// }
+	// if (err)
+	// 	exit(1);
 	// my_free(str1);
 	array_of_moves = ft_split(str0, ' ');
 	i = 0;

@@ -1,32 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   001.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mhrima <mhrima@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/11 00:28:05 by mhrima            #+#    #+#             */
+/*   Updated: 2023/02/11 00:28:58 by mhrima           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 
-#define and &&
-#define OR ||
-#define less <
-#define than
-#define do ?
-#define else :
-#define IF
-
-int main(void)
+int	main(void)
 {
+	int	x;
 
-	int x = 96;
-
-	// x < 20 ? printf("1") : printf("2");
-	IF x less than 20 do printf("1") else printf("2");
-
-	int y = 0;
-	int z = 0;
-	int push = 12;
-	while (x >= push)
-	{
-		z += x;
-		z += push;
-		x -= push;
-	}
-	//	z += (2*push);
-	z = 5 / 2;
-	printf("%d\n", z);
-	printf("%f\n", (float)7 / 2);
+	x = 1;
+	x == 1 && printf("hey\n");
 }
