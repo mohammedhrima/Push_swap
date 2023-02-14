@@ -6,13 +6,13 @@
 /*   By: mhrima <mhrima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 13:18:27 by mhrima            #+#    #+#             */
-/*   Updated: 2023/02/09 04:46:24 by mhrima           ###   ########.fr       */
+/*   Updated: 2023/02/11 08:55:34 by mhrima           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isdigit(int c)
+int ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');
 }

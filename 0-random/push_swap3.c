@@ -451,4 +451,17 @@ int main(int argc, char **argv)
 		moves += sort_five(A, B);
 	else if (len > 5)
 		moves += sort_more(A, B, len);
+	if ((len <= 3 && moves > 2) || (len > 3 && len <= 5 && moves > 12) || (len > 5 && len <= 100 && moves > 1100) ||
+		(len > 100 && len <= 500 && moves > 11500))
+		printf("Bad number of moves %d\n", moves);
+	else
+		printf("Good number of moves %d\n", moves);
+	i = 0;
+	while (i < A->lenght)
+	{
+		printf("%d ", A->array_of_nums[i++].value);
+	}
+	printf("\n");
+	if (is_sorted(A) == 0)
+		ft_printf("\033[0;31mwa elchriff verify dakchi 3endek %d < %d\n", A->array_of_nums[i].index, A->array_of_nums[i - 1].index);
 }

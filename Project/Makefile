@@ -7,11 +7,11 @@ OUT = ./push_swap
 OUT2 = ./checker
 RM = rm -rf
 
-$(OUT):
+$(OUT): $(SRC)
 	@echo compilling $(SRC)
 	@$(CC) $(LIB) $(SRC) -o $(OUT)
 
-$(OUT2):
+$(OUT2): $(SRC2)
 	@echo compilling $(SRC2)
 	@$(CC) $(LIB) $(SRC2) -o $(OUT2)
 
