@@ -184,16 +184,9 @@ int sort_five(stack *A, stack *B)
 }
 // sort more than 5
 
-int sort_more(stack *A, stack *B, int len)
+int set_precision(int len)
 {
-	float min;
-	float max;
 	int precision;
-	int moves;
-	int max_len;
-	int before_max_range;
-	int before_max;
-	int i;
 
 	if (len < 250)
 		precision = 4;
@@ -201,75 +194,98 @@ int sort_more(stack *A, stack *B, int len)
 		precision = 6;
 	if (len >= 500)
 		precision = 10;
+	return (precision);
+}
+
+void init_stack_B(stack *A, stack *B, int *moves, int len)
+{
+	float min;
+	float max;
+	int precision;
+
+	precision = set_precision(len);
 	min = 0.0;
 	max = len / precision;
-	moves = 0.0;
+	*moves = 0.0;
 	while (B->lenght < len)
 	{
 		while (B->lenght < (int)(max) && A->lenght)
 		{
 			if (A->array_of_nums[0].index >= min && A->array_of_nums[0].index < max)
 			{
-				moves += push(A, B, 'b');
+				(*moves) += push(A, B, 'b');
 				if (B->array_of_nums[0].index < (max - min) / 2 + min)
-					moves += rotate(B, 'b');
+					(*moves) += rotate(B, 'b');
 			}
 			else
-				moves += rotate(A, 'a');
+				(*moves) += rotate(A, 'a');
 		}
 		min += (len / precision);
 		max += (len / precision);
 	}
-	i = 0;
-	max_len = len - 1;
-	before_max_range = 0;
-	before_max = max_len - 1;
-	while (A->lenght < len)
+}
+
+int push_to_A(stack *B, stack *A, int *maximum_len, int before_max_range)
+{
+	int moves = 0;
+	if (B->array_of_nums[0].index == *maximum_len)
 	{
-		i = 0;
-		before_max_range = 0;
-		while (i < B->lenght && B->array_of_nums[i].index != max_len)
-			i++;
-		if (i < B->lenght / 2)
+		moves += push(B, A, 'b');
+		(*maximum_len)--;
+		if (before_max_range)
 		{
-			while (B->array_of_nums[0].index != max_len)
-			{
-				if (B->array_of_nums[0].index == max_len - 1)
-				{
-					moves += push(B, A, 'a');
-					before_max_range = 1;
-				}
-				else
-					moves += rotate(B, 'b');
-			}
-		}
-		else
-		{
-			while (B->array_of_nums[0].index != max_len)
-			{
-				if (B->array_of_nums[0].index == max_len - 1)
-				{
-					moves += push(B, A, 'a');
-					before_max_range = 1;
-				}
-				else
-					moves += reverse_rotate(B, 'b');
-			}
-		}
-		if (B->array_of_nums[0].index == max_len)
-		{
-			moves += push(B, A, 'b');
-			max_len--;
-			if (before_max_range)
-			{
-				moves += swap(A, 'a');
-				max_len--;
-			}
+			moves += swap(A, 'a');
+			(*maximum_len)--;
 		}
 	}
 	return (moves);
 }
 
+int find_max_len(stack *B, stack *A, int maximum_len, int *before_max_range, int i)
+{
+	int moves;
+
+	moves = 0;
+	while (B->array_of_nums[0].index != maximum_len)
+	{
+		if (B->array_of_nums[0].index == maximum_len - 1)
+		{
+			moves += push(B, A, 'a');
+			*before_max_range = 1;
+		}
+		else
+		{
+			if (i < B->lenght / 2)
+				moves += rotate(B, 'b');
+			else
+				moves += reverse_rotate(B, 'b');
+		}
+	}
+	return (moves);
+}
+
+int sort_more(stack *A, stack *B, int len)
+{
+	int moves;
+	int maximum_len;
+	int before_max_range;
+	int i;
+
+	init_stack_B(A, B, &moves, len);
+	i = 0;
+	maximum_len = len - 1;
+	before_max_range = 0;
+	while (A->lenght < len)
+	{
+		i = 0;
+		before_max_range = 0;
+		while (i < B->lenght && B->array_of_nums[i].index != maximum_len)
+			i++;
+		moves += find_max_len(B, A, maximum_len, &before_max_range, i);
+		moves += push_to_A(B, A, &maximum_len, before_max_range);
+	}
+	return (moves);
+}
 
 int ft_issign(char c)
 {
@@ -420,4 +436,6 @@ int main(int argc, char **argv)
 		moves += sort_five(A, B);
 	else if (len > 5)
 		moves += sort_more(A, B, len);
+	if (!is_sorted(A))
+		printf("\nnot sorted\n");
 }
