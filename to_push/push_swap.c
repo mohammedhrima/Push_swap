@@ -1,6 +1,4 @@
 #include "../Libft/libft.h"
-#define NOT !
-// int moves = 0;
 
 typedef struct number
 {
@@ -139,46 +137,9 @@ int sort_three(stack *X, char c)
 	}
 	return (moves);
 }
-int printstacks(stack *A, stack *B, int len, int moves)
-{
-#if 1
-	// if (len > 250)
-	// 	mysleep(2);
-	// else if (len > 50)
-	// 	mysleep(80);
-	// else if (len > 0)
-	// 	mysleep(300);
 
-	printf("\e[0;32m\n============================================================================\n");
-	int j = 0;
-	int k = 0;
-	printf("stack A   \n");
-	while (j < A->lenght)
-	{
-		printf("%4d ", A->array_of_nums[j++].index);
-		if (j % 15 == 0)
-			printf("|\n");
-	}
-	j = 0;
-	printf("\n\nstack B\n");
-	while (j < B->lenght)
-	{
-		printf("%4d ", B->array_of_nums[j++].index);
-		if (j % 15 == 0) // (j % (len / 8) == 0)
-			printf("|\n");
-	}
-	printf("\n============================================================================\n");
-	printf("number of moves: %d\n", moves);
-#endif
-	return (1);
-}
-// to verify
-/*
-find lkbar men 3 push them to b
-sort A
-get back from b
-*/
-int sort_five(stack *A, stack *B)
+// five sorting
+int split_stacks_for_five(stack *A, stack *B)
 {
 	int i;
 	int moves;
@@ -202,6 +163,15 @@ int sort_five(stack *A, stack *B)
 		if (A->array_of_nums[0].index >= 3)
 			moves += push(A, B, 'b');
 	}
+	return (moves);
+}
+
+int sort_five(stack *A, stack *B)
+{
+	int i;
+	int moves;
+
+	moves = split_stacks_for_five(A, B);
 	if (B->lenght > 1 && B->array_of_nums[0].index > B->array_of_nums[1].index)
 		moves += swap(B, 'b');
 	moves += sort_three(A, 'a');
@@ -212,6 +182,7 @@ int sort_five(stack *A, stack *B)
 	}
 	return (moves);
 }
+// sort more than 5
 
 int sort_more(stack *A, stack *B, int len)
 {
@@ -299,6 +270,7 @@ int sort_more(stack *A, stack *B, int len)
 	return (moves);
 }
 
+
 int ft_issign(char c)
 {
 	return (c == '+' || c == '-');
@@ -337,10 +309,7 @@ int is_sorted(stack *A)
 	while (i < A->lenght)
 	{
 		if (A->array_of_nums[i].value < A->array_of_nums[i - 1].value)
-		{
-			// ft_printf("\033[0;31mwa elchriff verify dakchi 3endek %d < %d\n", A->array_of_nums[i].index, A->array_of_nums[i - 1].index);
 			return (0);
-		}
 		i++;
 	}
 	return (1);
@@ -451,17 +420,4 @@ int main(int argc, char **argv)
 		moves += sort_five(A, B);
 	else if (len > 5)
 		moves += sort_more(A, B, len);
-	if ((len <= 3 && moves > 2) || (len > 3 && len <= 5 && moves > 12) || (len > 5 && len <= 100 && moves > 1100) ||
-		(len > 100 && len <= 500 && moves > 11500))
-		printf("Bad number of moves %d\n", moves);
-	else
-		printf("Good number of moves %d\n", moves);
-	i = 0;
-	while (i < A->lenght)
-	{
-		printf("%d ", A->array_of_nums[i++].value);
-	}
-	printf("\n");
-	if (is_sorted(A) == 0)
-		ft_printf("\033[0;31mwa elchriff verify dakchi 3endek %d < %d\n", A->array_of_nums[i].index, A->array_of_nums[i - 1].index);
 }

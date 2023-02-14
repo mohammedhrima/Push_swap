@@ -139,45 +139,7 @@ int sort_three(stack *X, char c)
 	}
 	return (moves);
 }
-int printstacks(stack *A, stack *B, int len, int moves)
-{
-#if 1
-	// if (len > 250)
-	// 	mysleep(2);
-	// else if (len > 50)
-	// 	mysleep(80);
-	// else if (len > 0)
-	// 	mysleep(300);
 
-	printf("\e[0;32m\n============================================================================\n");
-	int j = 0;
-	int k = 0;
-	printf("stack A   \n");
-	while (j < A->lenght)
-	{
-		printf("%4d ", A->array_of_nums[j++].index);
-		if (j % 15 == 0)
-			printf("|\n");
-	}
-	j = 0;
-	printf("\n\nstack B\n");
-	while (j < B->lenght)
-	{
-		printf("%4d ", B->array_of_nums[j++].index);
-		if (j % 15 == 0) // (j % (len / 8) == 0)
-			printf("|\n");
-	}
-	printf("\n============================================================================\n");
-	printf("number of moves: %d\n", moves);
-#endif
-	return (1);
-}
-// to verify
-/*
-find lkbar men 3 push them to b
-sort A
-get back from b
-*/
 int sort_five(stack *A, stack *B)
 {
 	int i;
@@ -230,9 +192,9 @@ int sort_more(stack *A, stack *B, int len)
 		precision = 6;
 	if (len >= 500)
 		precision = 10;
-	min = 0;
+	min = 0.0;
 	max = len / precision;
-	moves = 0;
+	moves = 0.0;
 	while (B->lenght < len)
 	{
 		while (B->lenght < (int)(max) && A->lenght)
@@ -337,10 +299,7 @@ int is_sorted(stack *A)
 	while (i < A->lenght)
 	{
 		if (A->array_of_nums[i].value < A->array_of_nums[i - 1].value)
-		{
-			// ft_printf("\033[0;31mwa elchriff verify dakchi 3endek %d < %d\n", A->array_of_nums[i].index, A->array_of_nums[i - 1].index);
 			return (0);
-		}
 		i++;
 	}
 	return (1);
