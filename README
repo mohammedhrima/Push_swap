@@ -82,17 +82,12 @@ for 5 <= x <= 8:
 
 // at the remove structs that contains value and index and keep the index
 
-split %2 == 0
-and   %3 == 0
-
-handle who can be splited to 2
-handle who can be splited to 3 handle it with :
-	x = x/2 + x % 2
-
-verify all pointers
-finish push swap then the tester
-
-find all number bellow akhir wahed
 
 
-A.lenght - A.lenght - i - 1 
+1- create header of utils
+2- create c file of utils
+
+
+
+
+
