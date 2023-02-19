@@ -6,7 +6,7 @@
 /*   By: mhrima <mhrima@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:01:43 by mhrima            #+#    #+#             */
-/*   Updated: 2023/02/15 21:14:50 by mhrima           ###   ########.fr       */
+/*   Updated: 2023/02/19 23:13:57 by mhrima           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	push_to_stack_a(t_stack*stack_b, t_stack *stack_a, int *maximum_len,
 	moves = 0;
 	if (stack_b->array_of_nums[0].index == *maximum_len)
 	{
-		moves += push(stack_b, stack_a, 'b');
+		moves += push(stack_b, stack_a, 'a');
 		(*maximum_len)--;
 		if (before_max_range)
 		{
